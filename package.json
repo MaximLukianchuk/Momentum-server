@@ -6,7 +6,7 @@
   "scripts": {
     "dev": "nodemon --exec babel-node -r dotenv/config src/app.js",
     "build": "rimraf ./dist && webpack --mode production --config webpack.config.js",
-    "start": "node ./dist/bundle.js"
+    "start": "npm run build && node ./dist/bundle.js"
   },
   "keywords": [
     "node",
