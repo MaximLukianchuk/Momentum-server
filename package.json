@@ -1,0 +1,38 @@
+{
+  "name": "momentum-server",
+  "version": "1.0.0",
+  "description": "Momentum server part",
+  "main": "src/app.js",
+  "scripts": {
+    "dev": "nodemon --exec babel-node -r dotenv/config src/app.js",
+    "build": "rimraf ./dist && webpack --mode production --config webpack.config.js",
+    "start": "node ./dist/bundle.js"
+  },
+  "keywords": [
+    "node",
+    "express",
+    "mongo"
+  ],
+  "author": "Lukianchuk Maksim, Smirnov Mark",
+  "license": "ISC",
+  "dependencies": {
+    "body-parser": "^1.19.0",
+    "cors": "^2.8.5",
+    "dotenv": "^8.2.0",
+    "express": "^4.17.1",
+    "mongoose": "^5.9.10",
+    "mongoose-findoneorcreate": "^1.0.3"
+  },
+  "devDependencies": {
+    "@babel/core": "^7.9.0",
+    "@babel/node": "^7.8.7",
+    "@babel/preset-env": "^7.9.5",
+    "babel-loader": "^8.1.0",
+    "dotenv-webpack": "^1.7.0",
+    "nodemon": "^2.0.3",
+    "rimraf": "^3.0.2",
+    "webpack": "^4.43.0",
+    "webpack-cli": "^3.3.11",
+    "webpack-node-externals": "^1.7.2"
+  }
+}
