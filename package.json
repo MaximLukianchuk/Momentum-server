@@ -4,6 +4,7 @@
   "description": "Momentum server part",
   "main": "src/app.js",
   "scripts": {
+    "heroku-prebuild": "npm install --only=dev",
     "dev": "nodemon --exec babel-node -r dotenv/config src/app.js",
     "build": "rimraf ./dist && webpack --mode production --config webpack.config.js",
     "start": "npm run build && node ./dist/bundle.js"
