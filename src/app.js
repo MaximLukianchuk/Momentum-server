@@ -1,5 +1,6 @@
 import express from 'express';
 import https from 'https';
+import http from 'http';
 import fs from 'fs';
 import bodyParser from 'body-parser';
 import cors from 'cors';
@@ -7,7 +8,7 @@ import { connect } from 'mongoose';
 
 import { createRouter } from './router';
 
-const PORT = process.env.PORT || 8080;
+const PORT = process.env.NODE_ENV === 'production' ? 443 : 8080;
 const DB_URI = process.env.DB_URI;
 
 const httpsServerOptions = {
@@ -22,7 +23,9 @@ app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
 app.use(createRouter());
 
-const server = https.createServer(httpsServerOptions, app);
+const server = process.env.NODE_ENV === 'production' ?
+    https.createServer(httpsServerOptions, app) :
+    http.createServer(app);
 
 
 async function start() {
@@ -32,9 +35,9 @@ async function start() {
             useFindAndModify: false,
             useUnifiedTopology: true,
         });
-    
+        
         server.listen(PORT, () => {
-            console.log('Server has been started...');
+            console.log('Server has been started on port ' + PORT);
         });
     } catch (err) {
         console.log(err)
