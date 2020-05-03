@@ -11,10 +11,10 @@ import { createRouter } from './router';
 const PORT = process.env.NODE_ENV === 'production' ? 443 : 8080;
 const DB_URI = process.env.DB_URI;
 
-const httpsServerOptions = {
+const httpsServerOptions = process.env.NODE_ENV === 'production' ? {
     'key': fs.readFileSync('key.pem', 'utf8'),
     'cert': fs.readFileSync('cert.pem', 'utf8')
-};
+} : null;
 
 const app = express();
 
@@ -35,12 +35,12 @@ async function start() {
             useFindAndModify: false,
             useUnifiedTopology: true,
         });
-        
+
         server.listen(PORT, () => {
             console.log('Server has been started on port ' + PORT);
         });
     } catch (err) {
-        console.log(err)
+        console.error(err)
     }
 }
 
