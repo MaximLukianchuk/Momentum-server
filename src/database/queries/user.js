@@ -4,7 +4,7 @@ export const findOrCreateUser = async ({ id }) =>
     await User.findOneOrCreate({ id }, { id });
 
 export const addUserEvent = async ({ id, event }) =>
-    await User.findOneAndUpdate({ id }, { $push: { events: event } }, { new: true, upsert: true });
+    await User.findOneAndUpdate({ id }, { $push: { events: { $each: [event], $position: 0 } } }, { new: true, upsert: true });
 
 
 export const updateUserEvent = async ({ id, eventId, ...changes }) => {
